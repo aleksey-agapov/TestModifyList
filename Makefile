@@ -5,13 +5,17 @@ OBJS = test_c.o test_tz.o
 
 EXECUTABLE = test_list
 
-.PHONY: all clean build test all
+.PHONY: all clean build build_static test all
 
 all: build test
 
+build_static: $(OBJS) 
+    @echo 'Building target: $@'
+    gcc -static -o $(EXECUTABLE) $(OBJS) 
+
 build: $(OBJS) 
 	@echo 'Building target: $@'
-	gcc -static -o $(EXECUTABLE) $(OBJS) 
+	gcc -o $(EXECUTABLE) $(OBJS) 
 
 %.o: %.c
 	@echo 'Building file: $<'
